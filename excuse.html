@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Random excuse generator</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<style>
+			body { font-family: Arial, Helvetica, sans-serif; text-align: center; }
+			i { font-size: 28px;}
+			button {display: block; margin: 15px auto}
+			p > span { width: 150px; display: inline-block; margin: 0 10px 10px 0; background: #ddd; border-radius: 8px; padding: 8px; }
+			p > span > span { margin: 0 0 8px; display: inline-block; }
+			#excuse { display: none; }
+		</style>
+		<script src="https://kit.fontawesome.com/aa2a57a14d.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<p>See what had happened was...</p>
+		<span id="placeholder">Excuse will go here...</span>
+		<p id="excuse" class="gray">
+			<span id="whoTxt"><span></span><br><i id="whoIcon" data-icon="icons" class="fa-solid"></i></span>
+			<span id="actionTxt"><span></span><br><i id="actionIcon" data-icon="icons" class="fa-solid"></i></span>
+			<span id="whatTxt"><span></span><br><i id="whatIcon" data-icon="icons" class="fa-solid"></i></span>
+			<span id="whenTxt"><span></span><br><i id="whenIcon" data-icon="icons" class="fa-solid"></i></span>
+		</p>		
+		<button type="button" id="generateIt">Generate</button>
+
+
+		<script>
+			let genBtn = document.querySelector('#generateIt');
+			let placeholder = document.querySelector('#placeholder');
+			let icons = document.querySelectorAll('#excuse span i');
+			let whoIcon = document.getElementById('whoIcon');
+			let actionIcon = document.getElementById('actionIcon');
+			let whatIcon = document.getElementById('whatIcon');
+			let whenIcon = document.getElementById('whenIcon');
+			let excuse = document.getElementById('excuse');
+			
+			genBtn.onclick = () => {
+				placeholder.style.display = 'none';
+				excuse.style.display = 'block';
+				generator();
+			}
+
+			let generator = () => {
+				let who = ['My pastor', 'My driver', 'My doctor'];
+				let action = ['drank', 'ate', 'gave'];
+				let what = ['my food', 'my coffee', 'my money'];
+				let when = ['at home', 'at work', 'in my car'];
+
+				let whoIconAr = ['fa-person-praying', 'fa-taxi', 'fa-user-doctor'];
+				let actionIconAr = ['fa-whiskey-glass', 'fa-utensils', 'fa-hand-holding-heart'];
+				let whatIconAr = ['fa-burger', 'fa-mug-hot', 'fa-sack-dollar'];
+				let whenIconAr = ['fa-house', 'fa-building', 'fa-car'];
+
+				let whoIndex = Math.floor(Math.random() * who.length);
+				let whatIndex = Math.floor(Math.random() * what.length);
+				let whenIndex = Math.floor(Math.random() * when.length);
+				let actionIndex = Math.floor(Math.random() * action.length);
+
+				icons.forEach((element) => {
+					element.removeAttribute('class');
+				});
+				
+				whoIcon.classList.add('fa-solid', whoIconAr[whoIndex]);
+				actionIcon.classList.add('fa-solid', actionIconAr[actionIndex]);
+				whatIcon.classList.add('fa-solid', whatIconAr[whatIndex]);
+				whenIcon.classList.add('fa-solid', whenIconAr[whenIndex]);
+
+				document.querySelector('#whoTxt span').innerHTML = who[whoIndex];
+				document.querySelector('#actionTxt span').innerHTML = action[actionIndex];
+				document.querySelector('#whatTxt span').innerHTML = what[whatIndex];
+				document.querySelector('#whenTxt span').innerHTML = when[whenIndex];
+
+			}
+		</script>
+	</body>
+</html>
